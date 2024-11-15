@@ -4,7 +4,7 @@ import winsound
 import time
 from cvzone.FaceMeshModule import FaceMeshDetector
 from cvzone.PlotModule import LivePlot
-from inputTimer import elapsedTime
+# from inputTimer import elapsedTime
 
 cap = cv2.VideoCapture(0)
 detector = FaceMeshDetector(maxFaces=1)
@@ -102,19 +102,18 @@ while True:
 
         img = cv2.resize(img, (640, 360))
         imgStack = cvzone.stackImages([img, imgPlot], 1, 2)
+
+        if left_ratio < eye_closed_threshold and right_ratio < eye_closed_threshold:
+            if closed_counter >= consec_frames:
+                winsound.Beep(1000, 1000)
+
+        else:
+            counter = 0
     else:
         img = cv2.resize(img, (640, 360))
         imgStack = cvzone.stackImages([img, img], 1, 2)
 
     cv2.imshow("Eye Open/Closed Detection", imgStack)
-
-
-    if left_ratio < eye_closed_threshold and right_ratio < eye_closed_threshold:
-        if closed_counter >= consec_frames:
-            winsound.Beep(1000, 1000)
-
-    else:
-        counter = 0
 
 
     if cv2.waitKey(25) & 0xFF == 27:
