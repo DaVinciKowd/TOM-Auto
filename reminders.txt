@@ -1,0 +1,10 @@
+FOR POWERSHELL
+
+#For adjusting execution policy
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+#For restricting executioon policy
+Set-ExecutionPolicy -ExecutionPolicy Restrict -Scope CurrentUser
+
+#To check execution policy status
+Get-ExecutionPolicy -Scope CurrentUser
