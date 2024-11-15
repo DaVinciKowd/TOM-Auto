@@ -21,6 +21,3 @@ android.fullscreen = 1
 
 # Python-for-Android distribution
 android.archs = arm64-v8a, armeabi-v7a
-
-# Full dependencies
-requirements = kivy, opencv-python-headless, winsound
