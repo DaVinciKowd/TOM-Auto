@@ -5,7 +5,9 @@ package.domain = org.avo
 source.dir = .
 source.include_exts = py
 
-requirements = python3,kivy,opencv-python-headless
+version = 0.1
+
+requirements = python3,kivy,opencv-python-headless,cvzone
 
 # Optional, use to restrict permissions
 android.permissions = CAMERA, VIBRATE
