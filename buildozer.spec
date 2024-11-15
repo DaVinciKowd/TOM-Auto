@@ -2,8 +2,6 @@
 title = EyeDetectionApp
 package.name = eyedetection
 package.domain = org.avo
-source.include_exts = py
-source.include_patterns = assets/*, images/*
 
 requirements = python3,kivy,opencv-python-headless
 
