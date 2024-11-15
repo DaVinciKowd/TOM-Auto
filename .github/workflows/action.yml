@@ -1,5 +1,4 @@
 name: 'Kivy App to APK'
-description: 'Convert Kivy app to APK using Buildozer'
 
 on:
   push:
@@ -51,9 +50,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install --upgrade Cython==0.29.33 buildozer
-          if [ -f requirements.txt ]; then
-            python3 -m pip install -r requirements.txt
-          fi
+          pip install opencv-python-headless,cvzone,kivy
         shell: bash
 
       # Build the APK using Buildozer
