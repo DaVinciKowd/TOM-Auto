@@ -50,7 +50,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install --upgrade Cython==0.29.33 buildozer
-          pip install opencv-python-headless,cvzone,kivy
+          pip install opencv-python-headless cvzone kivy
         shell: bash
 
       # Build the APK using Buildozer
