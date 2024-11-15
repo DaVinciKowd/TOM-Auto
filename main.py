@@ -1,9 +1,10 @@
 import cv2
 import cvzone
-import mediapipe
 import winsound
+import time
 from cvzone.FaceMeshModule import FaceMeshDetector
 from cvzone.PlotModule import LivePlot
+from inputTimer import elapsedTime
 
 cap = cv2.VideoCapture(0)
 detector = FaceMeshDetector(maxFaces=1)
@@ -12,7 +13,7 @@ plotY = LivePlot(640, 360, [20, 50], invert=True)
 leftEyeIDs = [159, 23, 130, 243]  
 rightEyeIDs = [386, 374, 263, 362]
 ratioList = []
-consec_frames = 200
+consec_frames = 400
 
 eye_closed_threshold = 30
 left_eye_state = "Open"
@@ -81,7 +82,7 @@ while True:
             color = (0, 255, 0)
 
 
-        marker_size = 3
+        marker_size = 2
         for (up, down, left, right) in [(left_up, left_down, left_left, left_right),
                                         (right_up, right_down, right_left, right_right)]:
             cv2.circle(img, up, marker_size, color, cv2.FILLED)
@@ -95,7 +96,7 @@ while True:
         cvzone.putTextRect(img, f'Left Eye: {left_eye_state}', (50, 50), colorR=color)
         cvzone.putTextRect(img, f'Right Eye: {right_eye_state}', (50, 100), colorR=color)
 
-        cvzone.putTextRect(img, f'Closed Eye Count: {closed_counter}', (50, 150), colorR=(255, 255, 0))
+        cvzone.putTextRect(img, f'Time: {closed_counter}', (50, 150), colorR=(255, 255, 0))
 
         imgPlot = plotY.update(ratioAverage, color)
 
