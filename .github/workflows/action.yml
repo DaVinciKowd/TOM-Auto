@@ -49,7 +49,7 @@ jobs:
       - name: Install Python Dependencies
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install --upgrade Cython==0.29.33 buildozer
+          python3 -m pip install --upgrade Cython==0.29.33 buildozer python-for-android
           pip install opencv-python-headless cvzone kivy
         shell: bash
 
