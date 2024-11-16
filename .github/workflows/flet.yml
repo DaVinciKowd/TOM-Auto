@@ -75,7 +75,7 @@ jobs:
     - name: Flet Build APK
       run: |
         flutter config --no-analytics
-        flet build apk --include-packages flet_lottie --verbose --build-number=$BUILD_NUMBER --build-version=$BUILD_VERSION
+        flet build apk --module-name flet_app.py --include-packages flet_lottie --verbose --build-number=$BUILD_NUMBER --build-version=$BUILD_VERSION
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4.3.4
