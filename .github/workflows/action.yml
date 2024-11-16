@@ -1,0 +1,68 @@
+name: 'Kivy App to APK'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up Python environment
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version || '3.8' }}
+          architecture: x64
+
+      # Set up Java environment
+      - name: Setup Java 17 (required for Gradle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin' # Can also use 'zulu' or 'liberica'
+          java-version: '17'
+
+      # Install system-level dependencies
+      - name: Install System Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+        shell: bash
+
+      # Set up a virtual environment
+      - name: Create and Activate Virtual Environment
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          python --version
+        shell: bash
+
+      # Install Python dependencies
+      - name: Install Python Dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install --upgrade Cython==0.29.33 buildozer python-for-android
+          pip install opencv-python-headless cvzone kivy
+        shell: bash
+
+      # Build the APK using Buildozer
+      - name: Build APK
+        run: |
+          buildozer android clean
+          buildozer android debug
+        shell: bash
+
+      # Upload APK as an artifact (optional)
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-apk
+          path: bin/*.apk
