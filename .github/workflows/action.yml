@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build-apk:
+  build-apk-kivy:
     runs-on: ubuntu-latest
     steps:
       # Checkout the code
