@@ -22,6 +22,7 @@ face_mesh = mp_face_mesh.FaceMesh(min_detection_confidence=0.5, min_tracking_con
 # Eye landmarks for left and right eyes
 leftEyeIDs = [159, 23, 130, 243]
 rightEyeIDs = [386, 374, 263, 362]
+consec_frames = 400
 ratioList = []
 eye_closed_threshold = 30
 
